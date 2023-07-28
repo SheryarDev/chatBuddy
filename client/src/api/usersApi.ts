@@ -13,12 +13,12 @@ export const FetchLoggedInUserApi = async () => {
   };
 
 
-  export const FetchUserFromApi = async (userId: any) => {
+  export const FetchUserFromApi = async (userId: string) => {
     try {
-      const { data: userData } = await axios.get(
-        `${get_base_url()}/api/auth/getUser/${userId}`
+      const response = await axios.get(
+        `http://localhost:8080/api/auth/getUser/${userId}`
       );
-      return userData;
+      return response;
     } catch (error) {
       console.error(error);
     }

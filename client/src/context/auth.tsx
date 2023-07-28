@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect, useState,ReactNode } from "react";
 import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { FetchLoggedInUserApi } from "../api/usersApi";
@@ -24,7 +24,7 @@ const UserContext = createContext<
   () => {},
 ]);
 
-const UserProvider = ({ children }: any) => {
+const UserProvider = ({ children }:  { children: ReactNode }) => {
   const [user, setUser] = useState<User>({
     data: null,
     loading: true,
@@ -34,7 +34,7 @@ const UserProvider = ({ children }: any) => {
   const token = localStorage.getItem("token");
 
   if (token) {
-    const decodedToken: any = jwtDecode(token);
+    const decodedToken:any = jwtDecode(token);
     const currentTime = Date.now() / 1000;
 
     if (decodedToken.exp < currentTime) {

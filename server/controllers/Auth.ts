@@ -306,19 +306,15 @@ router.post("/reset-password/:token", async (req, res) => {
     }
 });
 
-router.get("/getUsers", checkAuth, async (req, res) => {
+export const getUser= async (req:any, res:any) => {
     try {
-        const user = await User.find({
-            $or: [{ isAdmin: false }, { isAdmin: { $exists: false } }],
-        })
-            .select("name")
-            .sort({ createdAt: -1 })
-            .limit(5);
+        const user = await User.findOne({_id:req.params.userId})
+
         return res.json(user);
     } catch (error: any) {
         res.status(500).json({ message: error?.message });
     }
-});
+}
 
 
 export default router;
