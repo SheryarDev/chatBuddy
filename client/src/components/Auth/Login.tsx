@@ -46,7 +46,7 @@ const Login = () => {
     console.log("id",response?.data?.data?.user?.id)
     console.log("name",response?.data?.data?.user?.name)
     console.log("email",response?.data?.data?.user?.email)
-    console.log("error",response.data.errors[0].msg)
+    // console.log("error",response.data.errors[0].msg)
     if (response.data.data) {
       setUser({
         data: {
@@ -63,7 +63,7 @@ const Login = () => {
       axios.defaults.headers.common[
         "authorization"
       ] = `Bearer ${response?.data?.data.token}`;
-      // navigate("/");
+      navigate("/");
     } else {
       SetMessage(response.data.errors[0].msg);
       setTimeout(() => {

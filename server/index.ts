@@ -1,5 +1,7 @@
 import express from "express";
 import authRoutes from "./routes/Auth";
+import conversationRoutes from './routes/Conversations'
+import messagesRoutes from './routes/Messages'
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
@@ -46,6 +48,8 @@ mongoose
 
 
     app.use("/api/auth", authRoutes);
+    app.use("/api/conversations",conversationRoutes)
+    app.use("/api/messages",messagesRoutes)
 
 
     app.listen(8080, () => {

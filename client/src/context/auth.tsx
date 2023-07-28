@@ -81,7 +81,7 @@ console.log("token",token)
     }
   }, []);
 
-  fetchUser()
+
 
   return (
     <UserContext.Provider value={[user, setUser]}>
