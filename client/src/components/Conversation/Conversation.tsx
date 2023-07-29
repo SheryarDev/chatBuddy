@@ -4,24 +4,25 @@ import { FetchUserFromApi } from "../../api/usersApi";
 import { MessagesContext } from "../../context/MessagesContext";
 import { fetchConversationsMessagesApi } from "../../api/messagesApi";
 
-// interface ConversationProps{
-//     conversation:{
-
-//     },
-//     currentUser:string
-// }
+interface ConversationProps{
+    conversation:{
+      _id:string,
+      members:Array<string>
+    },
+    currentUser:string
+}
 interface ConversationUser{
     _id:string,
     name:string,
     email:string,
 }
-const Conversation = ({ conversation, currentUser }: any) => {
+const Conversation = ({ conversation, currentUser }: ConversationProps) => {
   const [conversationUser, setConversationsUser] = useState<ConversationUser>({_id:"",name:"",email:""});
   const [message,setMessages]=useContext(MessagesContext)
-  console.log("conversation user",conversationUser)
-console.log("message context",message)
+//   console.log("conversation user",conversationUser)
+// console.log("message context",message)
   console.log("conversation", conversation);
-  console.log("uer", currentUser);
+//   console.log("uer", currentUser);
   const fetchConversationsUser = async (userId: string) => {
     const res = await FetchUserFromApi(userId);
     setConversationsUser(res?.data);
@@ -34,9 +35,9 @@ console.log("message context",message)
     console.log("response", response);
   };
   useEffect(() => {
-    const friendId = conversation?.members?.find(
+    const friendId: string = conversation?.members?.find(
       (m: string) => m !== currentUser
-    );
+    ) ?? '';
     fetchConversationsUser(friendId);
   }, []);
   return (

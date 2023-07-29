@@ -1,15 +1,17 @@
 import React, { createContext, useState,ReactNode} from "react";
 
 type Message={
- ConversationId:string,
+ conversationId:string,
  sender:string,
- text:string
+ text:string,
+ createdAt:Date | string,
 
 }
 interface Messages {
   data: {
     messages: Array<Message>;
-  } | null;
+  } ;
+  // [Symbol.iterator](): IterableIterator<Message>;
   error: string | null;
   loading: boolean;
 }
@@ -18,7 +20,7 @@ const MessagesContext = createContext<
   [Messages, React.Dispatch<React.SetStateAction<Messages>>]
 >([
   {
-    data: null,
+    data: {messages:[{conversationId:"",sender:"",text:"",createdAt:""}]},
     loading: true,
     error: null,
   },
@@ -27,7 +29,7 @@ const MessagesContext = createContext<
 
 const MessagesProvider = ({ children }:  { children: ReactNode }) => {
   const [messages, setMessagess] = useState<Messages>({
-    data: null,
+    data: {messages:[{conversationId:"",sender:"",text:"",createdAt:""}]},
     loading: true,
     error: null,
   });

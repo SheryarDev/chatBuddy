@@ -3,12 +3,18 @@ import axios from "axios";
 import jwtDecode from "jwt-decode";
 import { FetchLoggedInUserApi } from "../api/usersApi";
 
+type decodedToken={
+  email:string,
+  iat:number,
+  exp:number
+}
+
 interface User {
   data: {
     id: string;
     email: string;
     name: string;
-  } | null;
+  }
   error: string | null;
   loading: boolean;
 }
@@ -17,16 +23,17 @@ const UserContext = createContext<
   [User, React.Dispatch<React.SetStateAction<User>>]
 >([
   {
-    data: null,
+    data: {id:"",email:"",name:""},
     loading: true,
     error: null,
   },
   () => {},
 ]);
 
+
 const UserProvider = ({ children }:  { children: ReactNode }) => {
   const [user, setUser] = useState<User>({
-    data: null,
+    data: {id:"",email:"",name:""},
     loading: true,
     error: null,
   });
@@ -34,7 +41,7 @@ const UserProvider = ({ children }:  { children: ReactNode }) => {
   const token = localStorage.getItem("token");
 
   if (token) {
-    const decodedToken:any = jwtDecode(token);
+    const decodedToken:decodedToken= jwtDecode(token);
     const currentTime = Date.now() / 1000;
 
     if (decodedToken.exp < currentTime) {
@@ -62,7 +69,7 @@ const UserProvider = ({ children }:  { children: ReactNode }) => {
       });
     } else if (response && response?.errors?.length) {
       setUser({
-        data: null,
+        data: {id:"",email:"",name:""},
         loading: false,
         error: response.errors[0].msg,
       });
@@ -74,7 +81,7 @@ console.log("token",token)
       fetchUser();
     } else {
       setUser({
-        data: null,
+        data: {id:"",email:"",name:""},
         loading: false,
         error: null,
       });
