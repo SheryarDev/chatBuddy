@@ -47,6 +47,7 @@ const Conversation = ({ conversation, currentUser }: ConversationProps) => {
         display: "flex",
         alignItems: "center",
         border: "1px solid lightgray",
+        borderColor:"secondary.main",
         width: "100%",
         p: 1.5,
         my: 1,

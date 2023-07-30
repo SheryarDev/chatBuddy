@@ -128,7 +128,7 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
          console.log(error)
    }
 }
-
+console.log("length",messages?.data?.messages)
 useEffect(() => {
   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 }, [messages]);
@@ -141,6 +141,7 @@ useEffect(() => {
             display: "flex",
             alignItems: "center",
             borderBottom: "1px solid lightgray",
+            borderColor:"secondary.main",
             width: "100%",
             p: 1.5,
           }}
@@ -155,7 +156,7 @@ useEffect(() => {
       </Box>
       <Box sx={{ height: "340px", px: 2, overflowY: "auto" }}>
 
-        {messages?.data?.messages?.length >0 ? messages?.data?.messages?.map((item:Message) => (
+        {messages?.data?.messages?.length >1 ? messages?.data?.messages?.map((item:Message) => (
           <Box
             sx={{
               display: "flex",
@@ -169,13 +170,15 @@ useEffect(() => {
               <Avatar sx={{ mr: 2, height: "50px", width: "50px" }} />
               <Typography
                 sx={{
-                  background: item.sender === user?.data?.id  ? "lightgray" : "blue",
+                  backgroundColor: item.sender === user?.data?.id  ? "lightgray" : "primary.main",
                   color: item.sender === user?.data?.id  ? "black" : "#fff",
                   py: 1,
-                  px: 3,
+                  px: 2,
                   borderRadius: 8,
+                  boxSizing:"border-box",
                   fontSize: "14px",
                   maxWidth: "300px",
+                  height:"fit-content"
                 }}
               >
                 {item.text}

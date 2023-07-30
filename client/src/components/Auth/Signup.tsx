@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
-import { Link,useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import AuthWrapper from "../shared/Auth/AuthWrapper";
 import { SignupApi } from "../../api/Auth";
@@ -31,7 +31,7 @@ const validationSchema = Yup.object().shape({
 const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
   const [message, SetMessage] = useState("");
 
   const initialValues = {
@@ -44,11 +44,11 @@ const Signup = () => {
   const handleSubmit = async (values: any) => {
     try {
       const { name, email, password } = values;
-      const data={name,email,password}
-      const response=await SignupApi(data)
-      console.log("response",response)
-      if(response){
-        navigate("/login")
+      const data = { name, email, password };
+      const response = await SignupApi(data);
+      console.log("response", response);
+      if (response) {
+        navigate("/login");
       }
     } catch (error) {
       console.log(error);
@@ -214,13 +214,18 @@ const Signup = () => {
               to="/login"
               style={{
                 textDecoration: "none",
-                color: "#150578",
-                fontSize: "12px",
-                fontWeight: 600,
-                margin: "0px 5px",
               }}
             >
-              Login
+              <Typography
+                sx={{
+                  color: "primary.main",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  margin: "0px 5px",
+                }}
+              >
+                Login
+              </Typography>
             </Link>
           </Box>
         </Box>

@@ -1,5 +1,5 @@
 import React, { ReactNode} from "react";
-import { Box,} from "@mui/material";
+import { Box,Paper} from "@mui/material";
 import AuthHeader from "./AuthHeader";
 import AuthFooter from "./AuthFooter";
 
@@ -14,10 +14,10 @@ const AuthWrapper: React.FC<Props>  = ({ children}) => {
   return (
     <>
 
-      <Box
+      <Paper
         component="div"
         sx={{
-          backgroundColor: "#F8F7FB",
+          // backgroundColor: "#F8F7FB",
           p: 3,
           maxWidth: "1349px",
           mx: "auto",
@@ -26,8 +26,9 @@ const AuthWrapper: React.FC<Props>  = ({ children}) => {
 
         <AuthHeader/>
 
-        <Box
+        <Paper
           component="div"
+          elevation={2}
           sx={{
             height: "600px",
             boxShadow: 4,
@@ -35,7 +36,7 @@ const AuthWrapper: React.FC<Props>  = ({ children}) => {
             mx: { md: 6, lg: 8, laptop: 12 },
             my: 4,
             display: "flex",
-            backgroundColor: "#fff",
+            // backgroundColor: "#fff",
           }}
         >
           <Box
@@ -71,11 +72,11 @@ const AuthWrapper: React.FC<Props>  = ({ children}) => {
           </Box>
 
 
-        </Box>
+        </Paper>
 
 
         <AuthFooter/>
-      </Box>
+      </Paper>
     </>
   );
 };

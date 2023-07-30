@@ -1,5 +1,5 @@
 import React from 'react'
-import {Box, Grid, TextField,Avatar, Typography} from "@mui/material"
+import {Box, Grid, TextField,Avatar, Typography,Paper} from "@mui/material"
 
 
 const ChatSidebar = () => {
@@ -9,7 +9,7 @@ const ChatSidebar = () => {
         <Box>
           <TextField placeholder='Search Your Buddy' fullWidth/>
         </Box>
-        <Box sx={{height:"100%",border:"1px solid #e7e8e9",borderColor:"secondary.main",p:2,mt:2,borderRadius:"12px",maxHeight:"450px"}} >
+        <Paper sx={{height:"100%",border:"1px solid #e7e8e9",borderColor:"secondary.main",p:2,mt:2,borderRadius:"12px",maxHeight:"450px"}} >
            <Box sx={{maxHeight:"420px",overflowY:"auto",px:1}}>
            {user.map((user)=>(
            <Grid  container  sx={{display:"flex",alignItems:"center",border:"1px solid #e7e8e9",borderColor:"secondary.main" ,width:"100%",p:1.5,my:1,borderRadius:"12px"}}>
@@ -17,7 +17,7 @@ const ChatSidebar = () => {
                    <Grid item xs={9}><Typography>{user.name}</Typography></Grid>
                 </Grid>))}
            </Box>
-        </Box>
+        </Paper>
 
     </Box>
   )

@@ -200,13 +200,18 @@ const Login = () => {
               to="/signup"
               style={{
                 textDecoration: "none",
-                color: "#150578",
-                fontSize: "12px",
-                fontWeight: 600,
-                margin: "0px 5px",
               }}
             >
-              Sign up
+             <Typography
+                sx={{
+                  color: "primary.main",
+                  fontSize: "12px",
+                  fontWeight: 600,
+                  margin: "0px 5px",
+                }}
+              >
+                Sign up
+              </Typography>
             </Link>
           </Box>
 
