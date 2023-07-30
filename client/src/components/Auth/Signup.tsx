@@ -32,7 +32,7 @@ const Signup = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
-  const [message, SetMessage] = useState("");
+  const [message] = useState("");
 
   const initialValues = {
     name: "",
@@ -40,7 +40,7 @@ const Signup = () => {
     password: "",
     ConfirmPassword: "",
   };
-
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (values: any) => {
     try {
       const { name, email, password } = values;

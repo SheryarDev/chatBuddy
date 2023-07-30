@@ -1,9 +1,9 @@
 import React,{useState,useContext,useEffect} from 'react'
-import {Box, Grid, Avatar, Typography, Divider,Paper} from "@mui/material"
+import {Box,Typography, Divider,Paper} from "@mui/material"
 import { fetchConversations } from '../../api/conversatonApi'
 import { UserContext } from '../../context/auth'
 import Conversation from '../Conversation/Conversation'
-import { MessagesContext } from '../../context/MessagesContext'
+
 
 interface Conversations{
   _id: string;
@@ -13,7 +13,6 @@ interface Conversations{
 }
 const ChatOnlineUser = () => {
   const [conversation,setConversations]=useState<Conversations[]>([])
-  const [message,setMessages]=useContext(MessagesContext)
   const [user]=useContext(UserContext)
   const currentUser:string=user?.data?.id;
 
@@ -34,13 +33,6 @@ const ChatOnlineUser = () => {
         <Paper  sx={{height:"100%",border:"1px solid lightgray",borderColor:"secondary.main",p:2,mt:2,borderRadius:"12px",maxHeight:"500px"}}>
         <Typography  sx={{mb:0.2,display:"block",color:"primary.main",fontSize:"22px",fontWeight:600}}>Chats</Typography>
         <Divider/>
-           {/* <Box sx={{maxHeight:"450px",overflowY:"auto",p:1,height:"100%"}} >
-           {users.map((user)=>(
-           <Grid  container  sx={{display:"flex",alignItems:"center",border:"1px solid lightgray" ,width:"100%",p:1.5,my:1,borderRadius:"12px"}}>
-                   <Grid item xs={3}><Avatar/></Grid>
-                   <Grid item xs={9}><Typography>{user.name}</Typography></Grid>
-                </Grid>))}
-           </Box> */}
 
                  <Box sx={{maxHeight:"430px",overflowY:"auto",p:1,height:"100%"}} >
            {conversation?.length >0 ? conversation.map((con)=>(

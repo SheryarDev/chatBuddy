@@ -4,7 +4,7 @@ type Message={
  conversationId:string,
  sender:string,
  text:string,
- createdAt:Date | string,
+ createdAt:Date | string | number,
 
 }
 interface Messages {

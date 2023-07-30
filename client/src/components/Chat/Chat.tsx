@@ -19,7 +19,7 @@ type Message={
   conversationId:string,
   sender:string,
   text:string,
-  createdAt:Date |string
+  createdAt:Date |string | number
 
  }
  type socketData={
@@ -36,7 +36,7 @@ type Message={
   conversationId:string
   sender:string,
   text:string,
-  createdAt:Date | string
+  createdAt:Date | number | string
 
  }
 const Chat = () => {

@@ -37,10 +37,12 @@ const Login = () => {
     password: "",
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleSubmit = async (values: any) => {
     try {
       const { email, password } = values;
       const data={email,password}
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const response:any=await LoginApi(data)
     console.log("response",response)
     console.log("id",response?.data?.data?.user?.id)
@@ -70,10 +72,6 @@ const Login = () => {
         SetMessage("");
       }, 1000);
     }
-
-    // if(response){
-    //   navigate("/")
-    // }
 
     } catch (error) {
       console.log(error);
