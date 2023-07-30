@@ -14,6 +14,7 @@ import { AddNewMessagesApi } from "../../api/messagesApi";
 import {  io,Socket} from "socket.io-client";
 
 
+
 type Message={
   conversationId:string,
   sender:string,
@@ -50,6 +51,8 @@ const [arrivalMessage,setArrivalMessage]=useState<arrivalMessage | null>(null)
   console.log("all context messages", messages);
 
 
+
+
   useEffect(()=>{
     if(user?.data?.id){
       socket.current?.emit("addUser",user?.data?.id)
@@ -69,7 +72,7 @@ const [arrivalMessage,setArrivalMessage]=useState<arrivalMessage | null>(null)
     sender:data.senderId,
     text:data.text,
     createdAt:Date.now(),
-    conversationId:messages?.data?.messages[0]?.conversationId
+    conversationId:messages?.conversationId
    })
    })
   },[])
@@ -95,14 +98,14 @@ useEffect(()=>{
   // const receiverId=messages?.data?.messages?.find((member)=>member.sender !==user?.data?.id)
   const receiver = messages?.data?.messages?.filter((message) => message.sender !== user?.data?.id);
 
-const receiverId = receiver.map((message) => message.sender);
-  console.log("reciverId",receiverId[0])
+const receiverId = receiver?.map((message) => message.sender);
+
 const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
    e.preventDefault();
    const message={
     sender:user?.data?.id,
     text:newMessage,
-    conversationId:messages?.data?.messages[0]?.conversationId
+    conversationId:messages?.conversationId
    }
 
    socket.current?.emit("sendMessage",{
@@ -110,10 +113,12 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
     receiverId:receiverId[0],
     text:newMessage
    })
+   console.log("message",message)
 
    try {
        const res=await AddNewMessagesApi(message);
       //  setMessages({...messages,data:{messages:[...messages,res?.data]}})
+      console.log("add new Message",res)
       setMessages(prevState => {
         return {
           ...prevState,
@@ -123,6 +128,7 @@ const handleSubmit=async(e:React.MouseEvent<HTMLButtonElement, MouseEvent>)=>{
           },
         };
       });
+      setNewMessage("")
        console.log(res)
    } catch (error) {
          console.log(error)
@@ -143,14 +149,15 @@ useEffect(() => {
             borderBottom: "1px solid lightgray",
             borderColor:"secondary.main",
             width: "100%",
+            minHeight:"70px",
             p: 1.5,
           }}
         >
           <Grid item xs={1}>
-            <Avatar sx={{ width: "50px", height: "50px" }} />
+           {messages?.FriendName ? <Avatar sx={{ width: "50px", height: "50px" }} />:"" }
           </Grid>
           <Grid item xs={11}>
-            <Typography>Sheryar</Typography>
+            <Typography>{messages?.FriendName}</Typography>
           </Grid>
         </Grid>
       </Box>
@@ -188,12 +195,13 @@ useEffect(() => {
               {item?.createdAt ? js_ago(new Date(item?.createdAt)) : ""}
             </Typography>
           </Box>
-        )):<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%"}}><Typography variant="h5" sx={{color:"lightgray"}}>Plz Select Conversation</Typography></Box>}
+        )):<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%"}}><Typography variant="h5" sx={{color:"lightgray",textAlign:"center"}}>Plz Select Your Chat or Start<br/> New Conversation</Typography></Box>}
       </Box>
-      <Box sx={{ height: "149px" }}>
+      <Box sx={{ height: "149px" ,border:"1px solid lightgray",borderColor:"secondary.main"}}>
         <TextField
           multiline
           rows={3}
+          value={newMessage}
           onChange={(e)=>setNewMessage(e.target.value)}
           placeholder="Write you message.."
           fullWidth
@@ -203,8 +211,8 @@ useEffect(() => {
             },
           }}
         />
-        <Box sx={{ display: "flex", justifyContent: "end", mt: 1 }}>
-          <Button variant="contained" sx={{ width: "150px" }} onClick={handleSubmit}>
+        <Box sx={{ display: "flex", justifyContent: "end", mt: 1,mx:2 }}>
+          <Button variant="contained" sx={{ width: "150px"}} disabled={newMessage===""} onClick={handleSubmit}>
             Send
           </Button>
         </Box>

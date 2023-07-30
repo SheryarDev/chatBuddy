@@ -11,7 +11,8 @@ interface Messages {
   data: {
     messages: Array<Message>;
   } ;
-  // [Symbol.iterator](): IterableIterator<Message>;
+  conversationId:string
+  FriendName:string,
   error: string | null;
   loading: boolean;
 }
@@ -21,6 +22,8 @@ const MessagesContext = createContext<
 >([
   {
     data: {messages:[{conversationId:"",sender:"",text:"",createdAt:""}]},
+    conversationId:"",
+    FriendName:'',
     loading: true,
     error: null,
   },
@@ -30,6 +33,8 @@ const MessagesContext = createContext<
 const MessagesProvider = ({ children }:  { children: ReactNode }) => {
   const [messages, setMessagess] = useState<Messages>({
     data: {messages:[{conversationId:"",sender:"",text:"",createdAt:""}]},
+    conversationId:"",
+    FriendName:"",
     loading: true,
     error: null,
   });

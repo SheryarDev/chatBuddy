@@ -3,6 +3,7 @@ import {Box, Grid, Avatar, Typography, Divider,Paper} from "@mui/material"
 import { fetchConversations } from '../../api/conversatonApi'
 import { UserContext } from '../../context/auth'
 import Conversation from '../Conversation/Conversation'
+import { MessagesContext } from '../../context/MessagesContext'
 
 interface Conversations{
   _id: string;
@@ -12,6 +13,7 @@ interface Conversations{
 }
 const ChatOnlineUser = () => {
   const [conversation,setConversations]=useState<Conversations[]>([])
+  const [message,setMessages]=useContext(MessagesContext)
   const [user]=useContext(UserContext)
   const currentUser:string=user?.data?.id;
 
@@ -41,9 +43,9 @@ const ChatOnlineUser = () => {
            </Box> */}
 
                  <Box sx={{maxHeight:"430px",overflowY:"auto",p:1,height:"100%"}} >
-           {conversation.map((con)=>(
-                       <Conversation conversation={con}  currentUser={currentUser}/>
-                ))}
+           {conversation?.length >0 ? conversation.map((con)=>(
+                       <Conversation conversation={con}  currentUser={currentUser} />
+                )) :<Box sx={{display:"flex",justifyContent:"center",alignItems:"center",height:"100%"}}>No Chats Found!</Box>}
            </Box>
 
         </Paper>

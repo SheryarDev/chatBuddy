@@ -33,12 +33,7 @@ const io = require("socket.io")(8900, {
     console.log("users",users)
     //send and get message
     socket.on("sendMessage", ({ senderId, receiverId, text }) => {
-        console.log("senderId",senderId)
-        console.log("reciverI",receiverId)
-        console.log("text",text)
-      const user = getUser(receiverId);
-      console.log("send message suer",user)
-      console.log("user scoket Id",user.socketId)
+     const user = getUser(receiverId);
       io.to(user.socketId).emit("getMessage", {
         senderId,
         text,

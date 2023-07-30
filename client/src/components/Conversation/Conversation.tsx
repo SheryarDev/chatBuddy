@@ -30,9 +30,12 @@ const Conversation = ({ conversation, currentUser }: ConversationProps) => {
 
 
   const handleConversationsMessages = async () => {
+    console.log("message conversation id",conversation?._id)
+
     const response = await fetchConversationsMessagesApi(conversation?._id);
-     setMessages({...message,data:{messages:response?.data}})
-    console.log("response", response);
+     setMessages({...message,data:{messages:response?.data},conversationId:conversation?._id,FriendName:conversationUser?.name})
+    console.log("conversation messsages response", response);
+
   };
   useEffect(() => {
     const friendId: string = conversation?.members?.find(
@@ -52,6 +55,11 @@ const Conversation = ({ conversation, currentUser }: ConversationProps) => {
         p: 1.5,
         my: 1,
         borderRadius: "12px",
+        cursor:"pointer",
+        transition: 'background-color 0.2s ease',
+        ":hover":{
+        backgroundColor:"primary.main"
+        }
       }}
       onClick={() => handleConversationsMessages()}
     >

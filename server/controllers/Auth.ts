@@ -317,4 +317,14 @@ export const getUser= async (req:any, res:any) => {
 }
 
 
+export const getAllUser= async (req:any, res:any) => {
+    try {
+        const user = await User.find({}).select("name email")
+        return res.json(user);
+    } catch (error: any) {
+        res.status(500).json({ message: error?.message });
+    }
+}
+
+
 export default router;

@@ -9,3 +9,19 @@ export const fetchConversations=(userId:string)=>{
     }
 
 }
+
+interface NewConversationPrams{
+  senderId:string
+  receiverId:string
+
+}
+
+export const AddNewConversationApi=({senderId,receiverId}:NewConversationPrams)=>{
+  try {
+      const res=axios.post(`http://localhost:8080/api/conversations/new-conversation`,{senderId,receiverId})
+     return res;
+  } catch (error) {
+    console.log(error)
+  }
+
+}

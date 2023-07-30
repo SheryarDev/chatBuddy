@@ -7,6 +7,11 @@ export const NewConversation=async (req:any,res:any)=>{
     })
 
     try {
+
+        const ConversationExist=await Conversation.findOne({members:{$all:[req.body.senderId,req.body.receiverId]}})
+        if(ConversationExist){
+         return res.json(ConversationExist)
+        }
          const savedConversation=await newConversation.save();
          res.status(200).json({savedConversation})
     } catch (error) {
