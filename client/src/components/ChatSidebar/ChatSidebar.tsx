@@ -1,4 +1,4 @@
-import React,{useState,useEffect,useContext} from 'react'
+import {useState,useEffect,useContext} from 'react'
 import {Box, Grid, TextField,Avatar, Typography,Paper} from "@mui/material"
 import { FetchAllUserFromApi } from '../../api/usersApi'
 import { UserContext } from '../../context/auth'

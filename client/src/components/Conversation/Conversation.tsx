@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext } from "react";
 import { Grid, Typography, Avatar } from "@mui/material";
 import { FetchUserFromApi } from "../../api/usersApi";
 import { MessagesContext } from "../../context/MessagesContext";
