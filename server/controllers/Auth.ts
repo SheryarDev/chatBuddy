@@ -318,8 +318,10 @@ export const getUser= async (req:any, res:any) => {
 
 
 export const getAllUser= async (req:any, res:any) => {
+    const searchedUser=req.query.searchedUser
     try {
-        const user = await User.find({}).select("name email")
+        const regex = new RegExp(searchedUser, 'i');
+        const user = await User.find({name:regex }).select("name email")
         return res.json(user);
     } catch (error: any) {
         res.status(500).json({ message: error?.message });

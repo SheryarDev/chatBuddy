@@ -1,4 +1,4 @@
-import {useState,useEffect,useContext} from 'react'
+import {useState,useEffect,useContext,useMemo} from 'react'
 import {Box, Grid, TextField,Avatar, Typography,Paper} from "@mui/material"
 import { FetchAllUserFromApi } from '../../api/usersApi'
 import { UserContext } from '../../context/auth'
@@ -16,6 +16,16 @@ const ChatSidebar = () => {
   const [user,]=useContext(UserContext)
   const [message,setMessages]=useContext(MessagesContext)
   const [newConversation,setNewConversation]=useState([])
+  const [searchQuery,setSearchQuery]=useState('')
+
+
+
+  const SearchUsers = useMemo(() => {
+    return allUsers?.filter((user: NewConversationUser) =>
+      user.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+  }, [searchQuery]);
+
 
   const handleFetchAllUsers=async()=>{
     const res=await FetchAllUserFromApi()
@@ -52,11 +62,13 @@ const ChatSidebar = () => {
   return (
     <Box sx={{borderRight:"1px solid #e7e8e9",borderColor:"secondary.main",height:"100%",minHeight:"535px",px:2,py:2}}>
         <Box>
-          <TextField placeholder='Search Your Buddy' fullWidth/>
+          <TextField placeholder='Search Your Buddy' fullWidth  type="text"
+        value={searchQuery}
+        onChange={(e)=>setSearchQuery(e.target.value)}/>
         </Box>
         <Paper sx={{height:"100%",border:"1px solid #e7e8e9",borderColor:"secondary.main",p:2,mt:2,borderRadius:"12px",maxHeight:"420px"}} >
            <Box sx={{maxHeight:"420px",overflowY:"auto",px:1}}>
-           {allUsers.filter((u:NewConversationUser)=>u._id !==user?.data?.id).map((user:NewConversationUser)=>(
+           {SearchUsers?.filter((u:NewConversationUser)=>u._id !==user?.data?.id)?.map((user:NewConversationUser)=>(
            <Grid  container  sx={{display:"flex",alignItems:"center",border:"1px solid #e7e8e9",borderColor:"secondary.main" ,width:"100%",p:1.5,my:1,borderRadius:"12px", transition: 'background-color 0.2s ease',
            ":hover":{
            backgroundColor:"primary.main"

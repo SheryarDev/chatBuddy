@@ -28,4 +28,7 @@ const userSchema = new Schema(
   { timestamps: true }
 );
 
+// Define a text index on the 'title' and 'content' fields
+// userSchema.index({ name: 'text', });
+
 export default mongoose.model("User", userSchema);
