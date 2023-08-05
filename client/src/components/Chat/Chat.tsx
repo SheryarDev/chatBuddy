@@ -139,7 +139,7 @@ useEffect(() => {
   scrollRef.current?.scrollIntoView({ behavior: "smooth" });
 }, [messages]);
   return (
-    <Box sx={{ height: "100%" }}>
+    <Box sx={{ height: "100%"}}>
       <Box>
         <Grid
           container
@@ -161,7 +161,7 @@ useEffect(() => {
           </Grid>
         </Grid>
       </Box>
-      <Box sx={{ height: "340px", px: 2, overflowY: "auto" }}>
+      <Box sx={{ height: "330px", px: 2, overflowY: "auto" }}>
 
         {messages?.data?.messages?.length >1 ? messages?.data?.messages?.map((item:Message) => (
           <Box
@@ -197,19 +197,21 @@ useEffect(() => {
           </Box>
         )):<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%"}}><Typography variant="h5" sx={{color:"lightgray",textAlign:"center"}}>Plz Select Your Chat or Start<br/> New Conversation</Typography></Box>}
       </Box>
-      <Box sx={{ height: "149px" ,border:"1px solid lightgray",borderColor:"secondary.main"}}>
+      <Box sx={{ height: "109px" ,borderTop:"1px solid lightgray",borderColor:"secondary.main"}}>
         <TextField
           multiline
           rows={3}
           value={newMessage}
+          sx={{px:2,pt:1}}
           onChange={(e)=>setNewMessage(e.target.value)}
           placeholder="Write you message.."
           fullWidth
-          inputProps={{
-            style: {
-              border: "none",
-            },
+          InputProps={{
+            disableUnderline: true,
           }}
+            variant="standard"
+
+
         />
         <Box sx={{ display: "flex", justifyContent: "end", mt: 1,mx:2 }}>
           <Button variant="contained" sx={{ width: "150px"}} disabled={newMessage===""} onClick={handleSubmit}>

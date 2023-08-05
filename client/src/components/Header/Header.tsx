@@ -27,7 +27,7 @@ const Header = () => {
   return (
     <>
     <CssBaseline/>
-    <Box sx={{backgroundColor:"primary.main",p:2,display:"flex",justifyContent:"space-between"}}>
+    <Box sx={{backgroundColor:"primary.main",p:2,display:"flex",justifyContent:"space-between",alignItems:"center"}}>
         <Box>
           <Typography variant='h5' sx={{color:'white',}}>ChatBuddy</Typography>
         </Box>
