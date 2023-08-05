@@ -195,7 +195,7 @@ useEffect(() => {
               {item?.createdAt ? js_ago(new Date(item?.createdAt)) : ""}
             </Typography>
           </Box>
-        )):<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%"}}><Typography variant="h5" sx={{color:"lightgray",textAlign:"center"}}>Plz Select Your Chat or Start<br/> New Conversation</Typography></Box>}
+        )):<Box sx={{display:"flex",alignItems:"center",justifyContent:"center",height:"100%"}}><Typography variant="h5" sx={{color:"primary.main",textAlign:"center"}}>Plz Select Your Chat or Start<br/> New Conversation</Typography></Box>}
       </Box>
       <Box sx={{ height: "109px" ,borderTop:"1px solid lightgray",borderColor:"secondary.main"}}>
         <TextField
